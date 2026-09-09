@@ -55,9 +55,9 @@ Shared primitives live in `src/components/`; offer-specific UI lives in `feature
 |---------|------------------|--------|
 | Server state | TanStack Query | Not in foundation |
 | Client/UI state | Zustand | Theme preference uses MMKV for now |
-| Backend | Node + PostgreSQL REST in `apps/api` | Sprint 3 — Fastify + Prisma (in progress) |
+| Backend | Node + PostgreSQL REST in `apps/api` | Sprint 3 — Fastify + Prisma + mobile JWT client |
 | Realtime | WebSockets | Later |
-| Lists | FlashList | Offer Discover list uses FlashList + JSON fixtures |
+| Lists | FlashList | Offer Discover list uses FlashList + API data |
 | Native modules | Swift/Kotlin bridge | Later |
 | Observability | Sentry + analytics/A/B | Later |
 | E2E | Maestro | Later |
@@ -66,10 +66,10 @@ Shared primitives live in `src/components/`; offer-specific UI lives in `feature
 
 Root `NavigationContainer` switches on a mock MMKV session (`store/session.ts` + `SessionProvider`):
 
-- **Unauthenticated:** Auth stack — Welcome → Login / Signup (no real API; any credentials call `signIn`).
+- **Unauthenticated:** Auth stack — Welcome → Login / Signup against `POST /auth/*`.
 - **Authenticated:** Main tabs — **Home**, **Discover** (stack), **Activity**, **Profile**, plus **Gallery** in `__DEV__` only.
-- Discover stack: `DiscoverList` → `OfferDetail` (fixture lookup by id).
-- Profile **Sign out** clears the session flag and returns to Auth.
+- Discover stack: `DiscoverList` → `OfferDetail` (API lookup by id).
+- Profile **Sign out** revokes refresh tokens and clears JWTs / session flag.
 
 ### Deep linking
 
@@ -85,7 +85,8 @@ REST API lives in [`apps/api`](../apps/api):
 - **Prisma** ORM + **PostgreSQL 16** via Docker Compose (`apps/api/docker-compose.yml`)
 - **Zod** request validation; errors shaped as `{ error: { code, message, details? } }`
 - Schema: User, RefreshToken, Offer, Quest, QuestProgress, Reward, Transaction
-- Mobile thin client (auth + offers) lands after domain routes; TanStack Query / Zustand remain Sprint 4
+- Mobile thin client in `apps/mobile/src/services/api` (JWT in MMKV, login/register + offers/profile)
+- TanStack Query / Zustand remain Sprint 4
 
 ## Git workflow
 

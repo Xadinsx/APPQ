@@ -6,6 +6,7 @@ jest.mock('react-native-mmkv', () => {
       set: (key, value) => {
         store.set(key, String(value));
       },
+      remove: key => store.delete(key),
     })),
   };
 });
@@ -54,3 +55,11 @@ jest.mock('@shopify/flash-list', () => {
     ),
   };
 });
+
+global.fetch = jest.fn(async () =>
+  Promise.resolve({
+    ok: true,
+    status: 204,
+    json: async () => ({}),
+  }),
+);
