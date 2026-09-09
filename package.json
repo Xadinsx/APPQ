@@ -12,8 +12,14 @@
     "mobile:android": "yarn workspace @appq/mobile android",
     "mobile:lint": "yarn workspace @appq/mobile lint",
     "mobile:typecheck": "yarn workspace @appq/mobile typecheck",
+    "api": "yarn workspace @appq/api",
+    "api:dev": "yarn workspace @appq/api dev",
+    "api:typecheck": "yarn workspace @appq/api typecheck",
+    "api:db:migrate": "yarn workspace @appq/api db:migrate",
+    "api:db:migrate:deploy": "yarn workspace @appq/api db:migrate:deploy",
+    "api:db:seed": "yarn workspace @appq/api db:seed",
     "lint": "yarn mobile:lint",
-    "typecheck": "yarn mobile:typecheck",
+    "typecheck": "yarn mobile:typecheck && yarn api:typecheck",
     "prepare": "husky"
   },
   "lint-staged": {

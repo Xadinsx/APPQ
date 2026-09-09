@@ -55,7 +55,7 @@ Shared primitives live in `src/components/`; offer-specific UI lives in `feature
 |---------|------------------|--------|
 | Server state | TanStack Query | Not in foundation |
 | Client/UI state | Zustand | Theme preference uses MMKV for now |
-| Backend | Node + PostgreSQL REST in `apps/api` | Stub only |
+| Backend | Node + PostgreSQL REST in `apps/api` | Sprint 3 — Fastify + Prisma (in progress) |
 | Realtime | WebSockets | Later |
 | Lists | FlashList | Offer Discover list uses FlashList + JSON fixtures |
 | Native modules | Swift/Kotlin bridge | Later |
@@ -76,6 +76,16 @@ Root `NavigationContainer` switches on a mock MMKV session (`store/session.ts` +
 - Prefix: `appquest://` (iOS URL type + Android VIEW intent-filter).
 - Path `offer/:id` opens Discover → OfferDetail when authenticated.
 - Linking is attached only while authenticated; cold-start links while signed out rely on React Navigation’s pending-link behavior after mock login (training default — no HTTPS universal links yet).
+
+## Backend (Sprint 3)
+
+REST API lives in [`apps/api`](../apps/api):
+
+- **Fastify** HTTP server on `0.0.0.0:3000`
+- **Prisma** ORM + **PostgreSQL 16** via Docker Compose (`apps/api/docker-compose.yml`)
+- **Zod** request validation; errors shaped as `{ error: { code, message, details? } }`
+- Schema: User, RefreshToken, Offer, Quest, QuestProgress, Reward, Transaction
+- Mobile thin client (auth + offers) lands after domain routes; TanStack Query / Zustand remain Sprint 4
 
 ## Git workflow
 

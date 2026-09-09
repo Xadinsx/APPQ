@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum QuestStatus {
+  PENDING
+  STARTED
+  COMPLETED
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  passwordHash  String
+  name          String?
+  pointsBalance Int            @default(0)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  refreshTokens RefreshToken[]
+  questProgress QuestProgress[]
+  transactions  Transaction[]
+}
+
+model RefreshToken {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+model Offer {
+  id        String   @id
+  title     String
+  subtitle  String
+  category  String
+  maxPoints Int
+  featured  Boolean  @default(false)
+  badge     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  quests    Quest[]
+}
+
+model Quest {
+  id           String          @id @default(cuid())
+  offerId      String
+  offer        Offer           @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?
+  pointsReward Int
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  progress     QuestProgress[]
+
+  @@index([offerId])
+}
+
+model QuestProgress {
+  id          String      @id @default(cuid())
+  userId      String
+  questId     String
+  status      QuestStatus @default(PENDING)
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quest       Quest       @relation(fields: [questId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questId])
+  @@index([userId])
+  @@index([questId])
+}
+
+model Reward {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  pointsCost  Int
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String
+  amount      Int
+  type        String
+  referenceId String?
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

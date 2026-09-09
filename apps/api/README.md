@@ -1,27 +1,57 @@
 # @appq/api
 
-Stub workspace for the AppQuest backend.
+AppQuest REST API (Fastify + Prisma + PostgreSQL).
 
-## Planned stack
+## Stack
 
-- **Runtime:** Node.js
-- **API style:** REST
-- **Database:** PostgreSQL
+- **Runtime:** Node.js 20+
+- **Framework:** Fastify
+- **ORM:** Prisma
+- **Database:** PostgreSQL 16 (Docker Compose)
+- **Validation:** Zod
+- **Errors:** `{ error: { code, message, details? } }`
 
-## Planned endpoints
+## Local setup
 
-| Method | Path | Purpose |
-|--------|------|---------|
-| `POST` | `/auth/login` | Authenticate |
-| `GET` | `/offers` | List offers |
-| `GET` | `/offers/:id` | Offer detail |
-| `GET` | `/quests` | List quests |
-| `POST` | `/quests/:id/start` | Start a quest |
-| `GET` | `/rewards` | List rewards |
-| `POST` | `/rewards/:id/redeem` | Redeem a reward |
-| `GET` | `/profile` | Current profile |
-| `GET` | `/transactions` | Points ledger |
+Requires **Docker Desktop** (or compatible engine) for Postgres.
 
-WebSocket support for live quest/reward updates is planned in a later epic.
+```bash
+# from repo root
+cp apps/api/.env.example apps/api/.env
+yarn
+cd apps/api && docker compose up -d
+yarn api:db:migrate:deploy   # or: yarn workspace @appq/api db:migrate
+yarn api:dev
+```
 
-This package intentionally has **no server implementation** in the Project Foundation sprint.
+> If Docker is unavailable, you can point `DATABASE_URL` at any Postgres 16 instance and run `yarn workspace @appq/api db:migrate:deploy`.
+
+Health check: `GET http://localhost:3000/health`
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `yarn api:dev` | Start API with hot reload |
+| `yarn api:db:migrate` | Run Prisma migrations (dev) |
+| `yarn api:db:seed` | Seed demo data (PR2+) |
+| `yarn api:typecheck` | TypeScript check |
+
+## Planned / implemented endpoints
+
+| Method | Path | Status |
+|--------|------|--------|
+| `GET` | `/health` | Implemented |
+| `POST` | `/auth/register` | Sprint 3 PR2 |
+| `POST` | `/auth/login` | Sprint 3 PR2 |
+| `POST` | `/auth/refresh` | Sprint 3 PR2 |
+| `POST` | `/auth/logout` | Sprint 3 PR2 |
+| `GET` | `/offers`, `/offers/:id` | Sprint 3 PR2 |
+| `GET` | `/quests` | Sprint 3 PR2 |
+| `POST` | `/quests/:id/start` | Sprint 3 PR2 |
+| `POST` | `/quests/:id/complete` | Sprint 3 PR2 |
+| `GET` | `/rewards` | Sprint 3 PR2 |
+| `POST` | `/rewards/:id/redeem` | Sprint 3 PR2 |
+| `GET` | `/profile` | Sprint 3 PR2 |
+
+WebSockets are deferred to a later epic.
