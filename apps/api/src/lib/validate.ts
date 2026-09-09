@@ -22,7 +22,7 @@ export function parseBody<T extends ZodTypeAny>(
   request: FastifyRequest,
   schema: T,
 ): z.infer<T> {
-  return parseWithSchema(schema, request.body);
+  return parseWithSchema(schema, request.body ?? {});
 }
 
 export function parseParams<T extends ZodTypeAny>(

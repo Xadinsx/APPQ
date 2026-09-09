@@ -42,16 +42,24 @@ Health check: `GET http://localhost:3000/health`
 | Method | Path | Status |
 |--------|------|--------|
 | `GET` | `/health` | Implemented |
-| `POST` | `/auth/register` | Sprint 3 PR2 |
-| `POST` | `/auth/login` | Sprint 3 PR2 |
-| `POST` | `/auth/refresh` | Sprint 3 PR2 |
-| `POST` | `/auth/logout` | Sprint 3 PR2 |
-| `GET` | `/offers`, `/offers/:id` | Sprint 3 PR2 |
-| `GET` | `/quests` | Sprint 3 PR2 |
-| `POST` | `/quests/:id/start` | Sprint 3 PR2 |
-| `POST` | `/quests/:id/complete` | Sprint 3 PR2 |
-| `GET` | `/rewards` | Sprint 3 PR2 |
-| `POST` | `/rewards/:id/redeem` | Sprint 3 PR2 |
-| `GET` | `/profile` | Sprint 3 PR2 |
+| `POST` | `/auth/register` | Implemented |
+| `POST` | `/auth/login` | Implemented |
+| `POST` | `/auth/refresh` | Implemented |
+| `POST` | `/auth/logout` | Implemented |
+| `GET` | `/offers`, `/offers/:id` | Implemented |
+| `GET` | `/quests` | Implemented |
+| `POST` | `/quests/:id/start` | Implemented |
+| `POST` | `/quests/:id/complete` | Implemented |
+| `GET` | `/rewards` | Implemented |
+| `POST` | `/rewards/:id/redeem` | Implemented |
+| `GET` | `/profile` | Implemented |
+| `GET` | `/transactions` | Implemented |
 
-WebSockets are deferred to a later epic.
+Demo seed user: `demo@appquest.dev` / `password123`
+
+```bash
+yarn api:db:seed
+yarn workspace @appq/api test
+# with server running:
+bash apps/api/scripts/smoke.sh
+```
