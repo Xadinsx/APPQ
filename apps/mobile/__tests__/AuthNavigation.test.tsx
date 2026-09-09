@@ -1,5 +1,11 @@
 import React from 'react';
-import { act, render, screen, fireEvent } from '@testing-library/react-native';
+import {
+  act,
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+} from '@testing-library/react-native';
 import { ThemeProvider } from '@shopify/restyle';
 import { AppThemeProvider } from '../src/theme';
 import {
@@ -12,6 +18,11 @@ import { themes } from '../src/theme/theme';
 import { WelcomeScreen } from '../src/features/auth/screens/WelcomeScreen';
 import { ProfileScreen } from '../src/features/profile/screens/ProfileScreen';
 import { signOut as clearSession } from '../src/store/session';
+import * as profileApi from '../src/services/api/profile';
+
+jest.mock('../src/services/api/profile', () => ({
+  fetchProfile: jest.fn(),
+}));
 
 describe('auth session gate', () => {
   afterEach(() => {
@@ -59,6 +70,14 @@ describe('auth and profile screens', () => {
 
   it('renders welcome navigation actions and profile sign out control', async () => {
     const navigate = jest.fn();
+    jest.mocked(profileApi.fetchProfile).mockResolvedValue({
+      id: 'u1',
+      email: 'demo@appquest.dev',
+      name: 'Demo Player',
+      pointsBalance: 12450,
+      createdAt: new Date().toISOString(),
+    });
+
     await render(
       <AppThemeProvider>
         <WelcomeScreen
@@ -91,6 +110,8 @@ describe('auth and profile screens', () => {
       </AppThemeProvider>,
     );
 
-    expect(screen.getByText('Sign out')).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText('Sign out')).toBeTruthy();
+    });
   });
 });

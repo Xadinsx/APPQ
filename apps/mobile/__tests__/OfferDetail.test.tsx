@@ -1,22 +1,31 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react-native';
+import { render, screen, waitFor } from '@testing-library/react-native';
 import { ThemeProvider } from '@shopify/restyle';
 import { OfferDetailScreen } from '../src/features/offers/screens/OfferDetailScreen';
-import { getOfferById, formatPoints } from '../src/features/offers/offersData';
+import { formatPoints } from '../src/features/offers/offersData';
 import { linking } from '../src/navigation/linking';
 import { themes } from '../src/theme/theme';
+import type { Offer } from '../src/features/offers/types';
+import * as offersApi from '../src/services/api/offers';
 
-describe('getOfferById', () => {
-  it('resolves fixture offers and misses unknown ids', () => {
-    expect(getOfferById('offer-1')?.title).toBe('Example Game');
-    expect(getOfferById('missing')).toBeUndefined();
-  });
-});
+const sampleOffer: Offer = {
+  id: 'offer-1',
+  title: 'Example Game',
+  subtitle: 'Play to earn',
+  category: 'Game',
+  maxPoints: 5000,
+  badge: 'New',
+};
+
+jest.mock('../src/services/api/offers', () => ({
+  fetchOfferById: jest.fn(),
+  fetchOffers: jest.fn(),
+  fetchFeaturedOffer: jest.fn(),
+}));
 
 describe('OfferDetailScreen', () => {
-  it('renders fixture offer details for a known id', async () => {
-    const offer = getOfferById('offer-1');
-    expect(offer).toBeDefined();
+  it('renders API offer details for a known id', async () => {
+    jest.mocked(offersApi.fetchOfferById).mockResolvedValue(sampleOffer);
 
     await render(
       <ThemeProvider theme={themes.dark}>
@@ -39,13 +48,19 @@ describe('OfferDetailScreen', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByText('Example Game')).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText('Example Game')).toBeTruthy();
+    });
     expect(
-      screen.getByText(`Earn up to ${formatPoints(offer!.maxPoints)} pts`),
+      screen.getByText(`Earn up to ${formatPoints(sampleOffer.maxPoints)} pts`),
     ).toBeTruthy();
   });
 
   it('shows empty state when the offer id is unknown', async () => {
+    jest
+      .mocked(offersApi.fetchOfferById)
+      .mockRejectedValue(new Error('Offer not found'));
+
     await render(
       <ThemeProvider theme={themes.dark}>
         <OfferDetailScreen
@@ -67,7 +82,9 @@ describe('OfferDetailScreen', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByText('Offer not found')).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText('Offer not found')).toBeTruthy();
+    });
   });
 });
 

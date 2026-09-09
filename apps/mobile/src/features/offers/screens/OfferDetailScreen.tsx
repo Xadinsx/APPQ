@@ -1,27 +1,72 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AppText, EmptyState, ErrorState } from '../../../components';
+import { AppText, EmptyState, ErrorState, Loading } from '../../../components';
 import { Box } from '../../../theme';
-import { getOfferById } from '../offersData';
 import { OfferBadge } from '../components/OfferBadge';
 import { RewardAmount } from '../components/RewardAmount';
+import type { Offer } from '../types';
+import { fetchOfferById, getErrorMessage } from '../../../services/api';
 import type { DiscoverStackParamList } from '../../../navigation/types';
 
 type Props = NativeStackScreenProps<DiscoverStackParamList, 'OfferDetail'>;
 
 export function OfferDetailScreen({ route }: Props): React.JSX.Element {
-  const offer = useMemo(() => getOfferById(route.params.id), [route.params.id]);
+  const [offer, setOffer] = useState<Offer | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [notFound, setNotFound] = useState(false);
 
-  if (!route.params.id) {
+  const load = useCallback(async () => {
+    if (!route.params.id) {
+      setError('No offer id was provided.');
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setNotFound(false);
+    try {
+      setOffer(await fetchOfferById(route.params.id));
+    } catch (err) {
+      const message = getErrorMessage(err, 'Unable to load offer');
+      if (message.toLowerCase().includes('not found')) {
+        setNotFound(true);
+      } else {
+        setError(message);
+      }
+      setOffer(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [route.params.id]);
+
+  useEffect(() => {
+    load().catch(() => undefined);
+  }, [load]);
+
+  if (loading) {
     return (
       <Box flex={1} backgroundColor="background" justifyContent="center">
-        <ErrorState title="Missing offer" message="No offer id was provided." />
+        <Loading label="Loading offer…" />
       </Box>
     );
   }
 
-  if (!offer) {
+  if (error) {
+    return (
+      <Box flex={1} backgroundColor="background" justifyContent="center">
+        <ErrorState
+          title={route.params.id ? 'Offer unavailable' : 'Missing offer'}
+          message={error}
+          onRetry={route.params.id ? load : undefined}
+        />
+      </Box>
+    );
+  }
+
+  if (notFound || !offer) {
     return (
       <Box flex={1} backgroundColor="background" justifyContent="center">
         <EmptyState

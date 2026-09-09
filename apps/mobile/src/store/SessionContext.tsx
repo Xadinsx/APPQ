@@ -10,6 +10,7 @@ import {
   setAuthenticated as persistAuthenticated,
   signOut as persistSignOut,
 } from './session';
+import { clearTokens, logoutRequest } from '../services/api';
 
 export type SessionContextValue = {
   isAuthenticated: boolean;
@@ -38,6 +39,9 @@ export function SessionProvider({
   }, []);
 
   const signOut = useCallback(() => {
+    logoutRequest().catch(() => {
+      clearTokens();
+    });
     persistSignOut();
     setIsAuthenticated(false);
   }, []);
