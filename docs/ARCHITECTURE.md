@@ -32,22 +32,39 @@ Why: keeps boundaries interview-legible, scales as offers/quests/rewards grow, a
 
 `newArchEnabled=true` (Android) and `RCTNewArchEnabled` (iOS). This aligns with later TurboModule / JSI experiments without a mid-project migration. Hermes remains enabled for startup/memory characteristics we will measure later.
 
+## Design system (Sprint 2a)
+
+UI is built with **Shopify Restyle** (typed tokens + variants), not a third-party component kit.
+
+| Token | Value |
+|-------|--------|
+| Background (dark) | `#0B0D10` |
+| Surface (dark) | `#14181F` |
+| Accent | `#B8FF3C` (acid lime) |
+| UI font | Space Grotesk |
+| Points font | IBM Plex Mono |
+| Icons | lucide-react-native |
+
+Theme mode (dark default) persists via **MMKV**. Breakpoints: `phone` (&lt;390), `phoneLarge` (390–767), `tablet` (≥768). A `__DEV__`-only **Gallery** tab previews primitives and theme toggle.
+
+Shared primitives live in `src/components/`; offer-specific UI lives in `features/offers/`.
+
 ## Deferred (intentional)
 
 | Concern | Planned approach | Status |
 |---------|------------------|--------|
 | Server state | TanStack Query | Not in foundation |
-| Client/UI state | Zustand | Folder reserved |
+| Client/UI state | Zustand | Theme preference uses MMKV for now |
 | Backend | Node + PostgreSQL REST in `apps/api` | Stub only |
 | Realtime | WebSockets | Later |
-| Lists | FlashList + measured perf | Later |
+| Lists | FlashList | Sprint 2a offer PR |
 | Native modules | Swift/Kotlin bridge | Later |
 | Observability | Sentry + analytics/A/B | Later |
 | E2E | Maestro | Later |
 
-## Navigation (foundation)
+## Navigation (foundation + gallery)
 
-Bottom tabs only: **Home**, **Discover**, **Activity** — placeholder screens to prove the shell. Stack navigators for offer/quest/reward detail land with product epics.
+Bottom tabs: **Home**, **Discover**, **Activity**, plus **Gallery** in `__DEV__` only. Auth stacks, Profile tab IA, and deep linking land in the Navigation epic (Sprint 2b).
 
 ## Git workflow
 

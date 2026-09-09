@@ -1,31 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Box } from '../../../theme';
+import { AppText } from '../../../components';
 
 export function DiscoverScreen(): React.JSX.Element {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Discover</Text>
-      <Text style={styles.subtitle}>
-        Offer feed (FlashList) will live here in a later epic.
-      </Text>
-    </View>
+    <Box
+      flex={1}
+      backgroundColor="background"
+      justifyContent="center"
+      padding="l"
+      style={styles.stack}
+    >
+      <AppText variant="header">Discover</AppText>
+      <AppText variant="bodyMuted">
+        Offer FlashList lands in the offer-components PR.
+      </AppText>
+    </Box>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 24,
-    backgroundColor: '#FFFFFF',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#555555',
+  stack: {
+    gap: 8,
   },
 });
