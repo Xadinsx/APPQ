@@ -10,7 +10,7 @@ describe('theme tokens', () => {
     expect(themes.light.colors.background).toBe(palette.lightBg);
     expect(themes.light.colors.accent).toBe(palette.limeMuted);
     expect(themes.dark.textVariants.points.fontFamily).toBe(
-      'IBMPlexMono_600SemiBold',
+      'IBMPlexMono-SemiBold',
     );
     expect(themes.dark.spacing.m).toBe(16);
     expect(themes.dark.borderRadii.l).toBe(16);

@@ -35,7 +35,7 @@ export function Input({
             styles.input,
             {
               color: theme.colors.textPrimary,
-              fontFamily: 'SpaceGrotesk_400Regular',
+              fontFamily: 'SpaceGrotesk-Regular',
             },
             style,
           ]}

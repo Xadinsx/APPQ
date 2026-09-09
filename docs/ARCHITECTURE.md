@@ -62,9 +62,15 @@ Shared primitives live in `src/components/`; offer-specific UI lives in `feature
 | Observability | Sentry + analytics/A/B | Later |
 | E2E | Maestro | Later |
 
-## Navigation (foundation + gallery)
+## Navigation (Sprint 2b)
 
-Bottom tabs: **Home**, **Discover**, **Activity**, plus **Gallery** in `__DEV__` only. Auth stacks, Profile tab IA, and deep linking land in the Navigation epic (Sprint 2b).
+Root `NavigationContainer` switches on a mock MMKV session (`store/session.ts` + `SessionProvider`):
+
+- **Unauthenticated:** Auth stack — Welcome → Login / Signup (no real API; any credentials call `signIn`).
+- **Authenticated:** Main tabs — **Home**, **Discover**, **Activity**, **Profile**, plus **Gallery** in `__DEV__` only.
+- Profile **Sign out** clears the session flag and returns to Auth.
+
+Deep linking (`appquest://offer/:id`), Discover stack, and OfferDetail land in the deeplinks follow-up PR (KAN-41).
 
 ## Git workflow
 

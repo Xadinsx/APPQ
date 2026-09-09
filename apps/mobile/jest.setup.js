@@ -10,22 +10,28 @@ jest.mock('react-native-mmkv', () => {
   };
 });
 
-jest.mock('expo-font', () => ({
-  useFonts: () => [true],
-  loadAsync: jest.fn(),
-}));
-
-jest.mock('@expo-google-fonts/space-grotesk', () => ({
-  SpaceGrotesk_400Regular: 'SpaceGrotesk_400Regular',
-  SpaceGrotesk_500Medium: 'SpaceGrotesk_500Medium',
-  SpaceGrotesk_600SemiBold: 'SpaceGrotesk_600SemiBold',
-  SpaceGrotesk_700Bold: 'SpaceGrotesk_700Bold',
-}));
-
-jest.mock('@expo-google-fonts/ibm-plex-mono', () => ({
-  IBMPlexMono_600SemiBold: 'IBMPlexMono_600SemiBold',
-  IBMPlexMono_700Bold: 'IBMPlexMono_700Bold',
-}));
+jest.mock('react-native-gesture-handler', () => {
+  const React = require('react');
+  const {View} = require('react-native');
+  return {
+    GestureHandlerRootView: ({children}) =>
+      React.createElement(View, null, children),
+    Swipeable: View,
+    DrawerLayout: View,
+    State: {},
+    PanGestureHandler: View,
+    BaseButton: View,
+    RectButton: View,
+    BorderlessButton: View,
+    ScrollView: require('react-native').ScrollView,
+    Switch: require('react-native').Switch,
+    TextInput: require('react-native').TextInput,
+    TouchableHighlight: require('react-native').TouchableHighlight,
+    TouchableOpacity: require('react-native').TouchableOpacity,
+    TouchableWithoutFeedback:
+      require('react-native').TouchableWithoutFeedback,
+  };
+});
 
 jest.mock('lucide-react-native', () => {
   const React = require('react');
