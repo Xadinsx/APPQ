@@ -13,6 +13,10 @@ export function getFeaturedOffer(): Offer | undefined {
   );
 }
 
+export function getOfferById(id: string): Offer | undefined {
+  return fixture.offers.find((offer: Offer) => offer.id === id);
+}
+
 export function formatPoints(points: number): string {
   return points.toLocaleString('en-US');
 }

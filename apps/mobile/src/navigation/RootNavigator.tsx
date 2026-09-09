@@ -10,6 +10,7 @@ import { useThemeMode } from '../theme';
 import { useSession } from '../store/SessionContext';
 import { AuthNavigator } from './AuthNavigator';
 import { MainTabNavigator } from './MainTabNavigator';
+import { linking } from './linking';
 
 export function RootNavigator(): React.JSX.Element {
   const theme = useTheme<Theme>();
@@ -29,7 +30,10 @@ export function RootNavigator(): React.JSX.Element {
   };
 
   return (
-    <NavigationContainer theme={navigationTheme}>
+    <NavigationContainer
+      theme={navigationTheme}
+      linking={isAuthenticated ? linking : undefined}
+    >
       {isAuthenticated ? <MainTabNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );

@@ -67,10 +67,15 @@ Shared primitives live in `src/components/`; offer-specific UI lives in `feature
 Root `NavigationContainer` switches on a mock MMKV session (`store/session.ts` + `SessionProvider`):
 
 - **Unauthenticated:** Auth stack — Welcome → Login / Signup (no real API; any credentials call `signIn`).
-- **Authenticated:** Main tabs — **Home**, **Discover**, **Activity**, **Profile**, plus **Gallery** in `__DEV__` only.
+- **Authenticated:** Main tabs — **Home**, **Discover** (stack), **Activity**, **Profile**, plus **Gallery** in `__DEV__` only.
+- Discover stack: `DiscoverList` → `OfferDetail` (fixture lookup by id).
 - Profile **Sign out** clears the session flag and returns to Auth.
 
-Deep linking (`appquest://offer/:id`), Discover stack, and OfferDetail land in the deeplinks follow-up PR (KAN-41).
+### Deep linking
+
+- Prefix: `appquest://` (iOS URL type + Android VIEW intent-filter).
+- Path `offer/:id` opens Discover → OfferDetail when authenticated.
+- Linking is attached only while authenticated; cold-start links while signed out rely on React Navigation’s pending-link behavior after mock login (training default — no HTTPS universal links yet).
 
 ## Git workflow
 

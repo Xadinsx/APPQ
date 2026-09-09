@@ -9,11 +9,11 @@ import {
 } from 'lucide-react-native';
 import { useTheme } from '@shopify/restyle';
 import { HomeScreen } from '../features/home/screens/HomeScreen';
-import { DiscoverScreen } from '../features/discover/screens/DiscoverScreen';
 import { ActivityScreen } from '../features/activity/screens/ActivityScreen';
 import { ProfileScreen } from '../features/profile/screens/ProfileScreen';
 import { GalleryScreen } from '../features/gallery/screens/GalleryScreen';
 import type { Theme } from '../theme';
+import { DiscoverStack } from './DiscoverStack';
 import type { MainTabParamList } from './types';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -59,7 +59,11 @@ export function MainTabNavigator(): React.JSX.Element {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Discover" component={DiscoverScreen} />
+      <Tab.Screen
+        name="Discover"
+        component={DiscoverStack}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen name="Activity" component={ActivityScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
       {__DEV__ ? <Tab.Screen name="Gallery" component={GalleryScreen} /> : null}
