@@ -1,21 +1,11 @@
 import React from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
-import { useFonts } from 'expo-font';
-import {
-  IBMPlexMono_600SemiBold,
-  IBMPlexMono_700Bold,
-} from '@expo-google-fonts/ibm-plex-mono';
-import {
-  SpaceGrotesk_400Regular,
-  SpaceGrotesk_500Medium,
-  SpaceGrotesk_600SemiBold,
-  SpaceGrotesk_700Bold,
-} from '@expo-google-fonts/space-grotesk';
 import { RootNavigator } from '../navigation/RootNavigator';
-import { AppThemeProvider, palette, useThemeMode } from '../theme';
-import { StatusBar } from 'react-native';
+import { SessionProvider } from '../store/SessionContext';
+import { AppThemeProvider, useThemeMode } from '../theme';
 
 enableScreens();
 
@@ -36,39 +26,21 @@ function AppShell(): React.JSX.Element {
 }
 
 export function App(): React.JSX.Element {
-  const [fontsLoaded] = useFonts({
-    SpaceGrotesk_400Regular,
-    SpaceGrotesk_500Medium,
-    SpaceGrotesk_600SemiBold,
-    SpaceGrotesk_700Bold,
-    IBMPlexMono_600SemiBold,
-    IBMPlexMono_700Bold,
-  });
-
-  if (!fontsLoaded) {
-    return (
-      <SafeAreaProvider>
-        <View style={styles.boot}>
-          <ActivityIndicator color={palette.lime} size="large" />
-        </View>
-      </SafeAreaProvider>
-    );
-  }
-
   return (
-    <SafeAreaProvider>
-      <AppThemeProvider>
-        <AppShell />
-      </AppThemeProvider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={styles.root}>
+      <SafeAreaProvider>
+        <AppThemeProvider>
+          <SessionProvider>
+            <AppShell />
+          </SessionProvider>
+        </AppThemeProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  boot: {
+  root: {
     flex: 1,
-    backgroundColor: palette.charcoal,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

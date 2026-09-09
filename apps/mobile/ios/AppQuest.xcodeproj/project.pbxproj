@@ -12,6 +12,12 @@
 		3178931D7D1DEB91B350C066 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B506209F3EF343BC8CC17558 /* SpaceGrotesk-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7CE02CA95CA4E5E9E55EAB2 /* SpaceGrotesk-Regular.ttf */; };
+		2F861186E3BE44E4B2B1EEF9 /* IBMPlexMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA5A58EFD13B4DD8AA124CE1 /* IBMPlexMono-Bold.ttf */; };
+		D19967B800F1406BAD79C29E /* SpaceGrotesk-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA0ABF3951CB4E81BCBB02FC /* SpaceGrotesk-SemiBold.ttf */; };
+		9BFC1CC4E5BB49B3B45E2F71 /* SpaceGrotesk-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB2EB9286A53447C9D0C27A3 /* SpaceGrotesk-Medium.ttf */; };
+		28299304323849B4A5BCAD78 /* IBMPlexMono-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CAA5EEC67BC744D1AEC4739A /* IBMPlexMono-SemiBold.ttf */; };
+		4EC4D08E478E41F7B3F3E262 /* SpaceGrotesk-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8CC9CE87A6544FD8D663AC4 /* SpaceGrotesk-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +31,12 @@
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = AppQuest/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AppQuest/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		B7CE02CA95CA4E5E9E55EAB2 /* SpaceGrotesk-Regular.ttf */ = {isa = PBXFileReference; name = "SpaceGrotesk-Regular.ttf"; path = "../assets/fonts/SpaceGrotesk-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EA5A58EFD13B4DD8AA124CE1 /* IBMPlexMono-Bold.ttf */ = {isa = PBXFileReference; name = "IBMPlexMono-Bold.ttf"; path = "../assets/fonts/IBMPlexMono-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FA0ABF3951CB4E81BCBB02FC /* SpaceGrotesk-SemiBold.ttf */ = {isa = PBXFileReference; name = "SpaceGrotesk-SemiBold.ttf"; path = "../assets/fonts/SpaceGrotesk-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EB2EB9286A53447C9D0C27A3 /* SpaceGrotesk-Medium.ttf */ = {isa = PBXFileReference; name = "SpaceGrotesk-Medium.ttf"; path = "../assets/fonts/SpaceGrotesk-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CAA5EEC67BC744D1AEC4739A /* IBMPlexMono-SemiBold.ttf */ = {isa = PBXFileReference; name = "IBMPlexMono-SemiBold.ttf"; path = "../assets/fonts/IBMPlexMono-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F8CC9CE87A6544FD8D663AC4 /* SpaceGrotesk-Bold.ttf */ = {isa = PBXFileReference; name = "SpaceGrotesk-Bold.ttf"; path = "../assets/fonts/SpaceGrotesk-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +87,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				191C094AE8A44867A0AB2E89 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -97,6 +110,20 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		191C094AE8A44867A0AB2E89 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				B7CE02CA95CA4E5E9E55EAB2 /* SpaceGrotesk-Regular.ttf */,
+				EA5A58EFD13B4DD8AA124CE1 /* IBMPlexMono-Bold.ttf */,
+				FA0ABF3951CB4E81BCBB02FC /* SpaceGrotesk-SemiBold.ttf */,
+				EB2EB9286A53447C9D0C27A3 /* SpaceGrotesk-Medium.ttf */,
+				CAA5EEC67BC744D1AEC4739A /* IBMPlexMono-SemiBold.ttf */,
+				F8CC9CE87A6544FD8D663AC4 /* SpaceGrotesk-Bold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -161,6 +188,12 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3178931D7D1DEB91B350C066 /* PrivacyInfo.xcprivacy in Resources */,
+				B506209F3EF343BC8CC17558 /* SpaceGrotesk-Regular.ttf in Resources */,
+				2F861186E3BE44E4B2B1EEF9 /* IBMPlexMono-Bold.ttf in Resources */,
+				D19967B800F1406BAD79C29E /* SpaceGrotesk-SemiBold.ttf in Resources */,
+				9BFC1CC4E5BB49B3B45E2F71 /* SpaceGrotesk-Medium.ttf in Resources */,
+				28299304323849B4A5BCAD78 /* IBMPlexMono-SemiBold.ttf in Resources */,
+				4EC4D08E478E41F7B3F3E262 /* SpaceGrotesk-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
