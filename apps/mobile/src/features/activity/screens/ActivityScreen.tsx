@@ -1,31 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Box } from '../../../theme';
+import { AppText } from '../../../components';
 
 export function ActivityScreen(): React.JSX.Element {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Activity</Text>
-      <Text style={styles.subtitle}>
+    <Box
+      flex={1}
+      backgroundColor="background"
+      justifyContent="center"
+      padding="l"
+      style={styles.stack}
+    >
+      <AppText variant="header">Activity</AppText>
+      <AppText variant="bodyMuted">
         Quest progress and transactions will live here.
-      </Text>
-    </View>
+      </AppText>
+    </Box>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 24,
-    backgroundColor: '#FFFFFF',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#555555',
+  stack: {
+    gap: 8,
   },
 });
