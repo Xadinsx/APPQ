@@ -1,27 +1,34 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
-import { Box } from '../../../theme';
 import { AppText } from '../../../components';
+import { Box } from '../../../theme';
+import { OfferList, getOffers } from '../../offers';
+import { useBreakpoint } from '../../../hooks/useBreakpoint';
 
 export function DiscoverScreen(): React.JSX.Element {
+  const offers = useMemo(() => getOffers(), []);
+  const breakpoint = useBreakpoint();
+
   return (
-    <Box
-      flex={1}
-      backgroundColor="background"
-      justifyContent="center"
-      padding="l"
-      style={styles.stack}
-    >
-      <AppText variant="header">Discover</AppText>
-      <AppText variant="bodyMuted">
-        Offer FlashList lands in the offer-components PR.
-      </AppText>
+    <Box flex={1} backgroundColor="background">
+      <OfferList
+        offers={offers}
+        ListHeaderComponent={
+          <Box style={styles.header}>
+            <AppText variant="header">Discover</AppText>
+            <AppText variant="bodyMuted">
+              Recommended for you · {breakpoint}
+            </AppText>
+          </Box>
+        }
+      />
     </Box>
   );
 }
 
 const styles = StyleSheet.create({
-  stack: {
+  header: {
     gap: 8,
+    marginBottom: 16,
   },
 });

@@ -14,6 +14,7 @@ import {
   Loading,
 } from '../../../components';
 import { useBreakpoint } from '../../../hooks/useBreakpoint';
+import { OfferCard, RewardAmount, getFeaturedOffer } from '../../offers';
 
 function Section({
   title,
@@ -37,6 +38,7 @@ export function GalleryScreen(): React.JSX.Element {
   const breakpoint = useBreakpoint();
   const [modalVisible, setModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const featuredOffer = getFeaturedOffer();
 
   return (
     <ScrollView>
@@ -108,6 +110,11 @@ export function GalleryScreen(): React.JSX.Element {
             onRetry={() => undefined}
           />
         </Card>
+
+        <Section title="Offer components">
+          <RewardAmount points={5000} />
+          {featuredOffer ? <OfferCard offer={featuredOffer} /> : null}
+        </Section>
       </Box>
 
       <AppModal
