@@ -1,0 +1,35 @@
+{
+  "name": "appq",
+  "private": true,
+  "version": "0.0.1",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "mobile": "yarn workspace @appq/mobile",
+    "mobile:start": "yarn workspace @appq/mobile start",
+    "mobile:ios": "yarn workspace @appq/mobile ios",
+    "mobile:android": "yarn workspace @appq/mobile android",
+    "mobile:lint": "yarn workspace @appq/mobile lint",
+    "mobile:typecheck": "yarn workspace @appq/mobile typecheck",
+    "lint": "yarn mobile:lint",
+    "typecheck": "yarn mobile:typecheck",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "apps/mobile/{src,__tests__}/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config apps/mobile/.eslintrc.js",
+      "prettier --write --config apps/mobile/.prettierrc.js"
+    ]
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "yarn@3.6.4",
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.0"
+  }
+}

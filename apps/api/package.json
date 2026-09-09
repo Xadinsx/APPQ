@@ -1,0 +1,10 @@
+{
+  "name": "@appq/api",
+  "version": "0.0.1",
+  "private": true,
+  "description": "AppQuest API stub — Node.js + PostgreSQL planned",
+  "scripts": {
+    "start": "node -e \"console.log('API not implemented yet. See README.md.')\"",
+    "typecheck": "echo 'No TypeScript sources in API stub yet'"
+  }
+}
