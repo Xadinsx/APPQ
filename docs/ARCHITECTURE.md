@@ -57,7 +57,7 @@ Shared primitives live in `src/components/`; offer-specific UI lives in `feature
 | Client/UI state | Zustand | Theme preference uses MMKV for now |
 | Backend | Node + PostgreSQL REST in `apps/api` | Stub only |
 | Realtime | WebSockets | Later |
-| Lists | FlashList | Sprint 2a offer PR |
+| Lists | FlashList | Offer Discover list uses FlashList + JSON fixtures |
 | Native modules | Swift/Kotlin bridge | Later |
 | Observability | Sentry + analytics/A/B | Later |
 | E2E | Maestro | Later |

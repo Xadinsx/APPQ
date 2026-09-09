@@ -30,6 +30,7 @@ __metadata:
     "@react-native/typescript-config": 0.87.1
     "@react-navigation/bottom-tabs": ^7.18.18
     "@react-navigation/native": ^7.3.18
+    "@shopify/flash-list": ^2.3.2
     "@shopify/restyle": ^2.4.5
     "@testing-library/jest-native": ^5.4.3
     "@testing-library/react-native": ^14.0.1
@@ -2730,6 +2731,17 @@ __metadata:
   dependencies:
     nanoid: ^3.3.11
   checksum: 4a111285cd99ddf91a456c464a302b1bb5da94359fcf426c819ae79d24f71d808bda23c12b5497778bc6a8c581114e267f4ec3b12f0ec57847a7af91e8a89b55
+  languageName: node
+  linkType: hard
+
+"@shopify/flash-list@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "@shopify/flash-list@npm:2.3.2"
+  peerDependencies:
+    "@babel/runtime": "*"
+    react: "*"
+    react-native: "*"
+  checksum: d6a3ea586c6024372e7e42283db05f2ca6173ba3015e96a9e469a41f94fcd064a92059875d1cc9d14c704580d6a42791f2956d50e992203c2656489736dc6f4b
   languageName: node
   linkType: hard
 
